@@ -3,7 +3,7 @@
 ## Overview
 
 This app is built with [Create React App](https://github.com/facebook/create-react-app "Create React App"). It uses [Material UI](https://material-ui.com/ "Material UI") for themes and styling and [ReactBootstrapTable](http://allenfang.github.io/react-bootstrap-table/index.html "ReactBootstrapTable") for displaying tables.<br>
-It uses [restaf-server](https://www.npmjs.com/package/@sassoftware/restaf-server "restaf-server") for its app server and [restaf](https://www.npmjs.com/package/@sassoftware/restaf "restaf") to make REST API calls to a SAS Viya Server. <br>
+It uses [restaf-server](https://www.npmjs.com/package/@sassoftware/restaf-server "restaf-server") to serve up the pages and authenticate to the SAS Viya server and [restaf](https://www.npmjs.com/package/@sassoftware/restaf "restaf") on the client-side to make REST API calls. <br>
 The optimization code is submitted using the ['runOptmodel'](https://go.documentation.sas.com/?docsetId=casactmopt&docsetTarget=casactmopt_optimization_details03.htm&docsetVersion=8.3&locale=en "runOptmodel") and executed using Cloud Analytic Services (CAS).
 
 ## Installation
