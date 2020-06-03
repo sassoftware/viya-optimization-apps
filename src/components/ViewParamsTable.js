@@ -61,20 +61,10 @@ class _ViewParamsTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data        : props.data,
+      data        : [],
       scenario    : 'Optimal Solution',
-      viable_sites: props.viable_sites,
-      objType     : "1"
+      viable_sites: [],
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      data        : nextProps.data,
-      scenario    : nextProps.scenario,
-      viable_sites: nextProps.viable_sites,
-      objType     : nextProps.objType
-    });
   }
 
   // Add the async function (e.g. loadParamsData) to fetch data to be displayed in table
@@ -111,11 +101,6 @@ class _ViewParamsTable extends React.Component {
     .catch(err =>{
       alert(JSON.stringify(err, null, 4))
     })
-  }
-
-  componentDidUpdate () {
-    console.log(this.state.objType)
-    console.log(this.state.data)
   }
 
   //Function to format cell value to number with 2 decimal places
@@ -211,7 +196,7 @@ class _ViewParamsTable extends React.Component {
             </div>
           </div>
           <div>
-            <ParamsButtonGroup data = {this.state.data} objType = {this.state.objType} scenario={this.state.scenario} />
+            <ParamsButtonGroup data={this.state.data} scenario={this.state.scenario} />
           </div>
       </div>
     )

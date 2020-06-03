@@ -24,17 +24,17 @@ import './index.css';
 import App from './App';
 //import * as serviceWorker from 'serviceWorker';
 
-const $ = window.$;
-let appEnv = window.optUI.appEnv;
-debugger;
-let store = restaf.initStore();
-debugger;
-setupViya(store, appEnv, window.optUI.logonPayload)
-    .then ( (r) => {
-        ReactDOM.render(
-            <AppProvider value={{store: store, viya: r}}>
-                <App />
-            </AppProvider>
-        , document.querySelector('#root'));
-    })
-    .catch(err => console.log(JSON.stringify(err, null, 4)))
+// const $ = window.$;
+// let appEnv = window.optUI.appEnv;
+// debugger;
+// let store = restaf.initStore();
+// debugger;
+// setupViya(store, appEnv, window.optUI.logonPayload)
+//     .then ( (r) => {
+//         ReactDOM.render(
+//             <AppProvider value={{store: store, viya: r}}>
+//                 <App />
+//             </AppProvider>
+//         , document.querySelector('#root'));
+//     })
+//     .catch(err => console.log(JSON.stringify(err, null, 4)))

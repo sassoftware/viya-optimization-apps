@@ -15,10 +15,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ---------------------------------------------------------------------------------------
 */
-async function startUp(appEnv, session, store){
+async function startUp(appEnv, session, store) {
   let caslStatements = `
   action table.dropTable / name='${appEnv.OPTABLENAME}' caslib='${appEnv.WORKLIBNAME}' quiet=TRUE;
-
+  action table.dropTable / name='${appEnv.COMPARISONTABLE}' caslib='${appEnv.WORKLIBNAME}' quiet=TRUE;
+  
   /*Running Some Data Step Code to read input data into work library */
 
   datastep.runCode / single = 'yes'
@@ -44,7 +45,11 @@ async function startUp(appEnv, session, store){
     datastep.runCode / single = 'yes'
       code = "
         data ${appEnv.WORKLIBNAME}.${appEnv.COMPARISONTABLE}_1;
-        set ${appEnv.INPUTLIBNAME}.${appEnv.COMPARISONTABLE};
+        set ${appEnv.INPUTLIBNAME}.${appEnv.COMPARISONTABLE} (rename = (product=product_ch site=site_ch soln_type=soln_type_ch));
+        soln_type = put(soln_type_ch, $25.);
+        product = put(product_ch, $12.);
+        site = put(site_ch, $12.);
+        drop product_ch site_ch soln_type_ch;
         run;
       ";
     run;
@@ -61,12 +66,25 @@ async function startUp(appEnv, session, store){
   		caslib= '${appEnv.WORKLIBNAME}' path= '${appEnv.COMPARISONTABLE}_1.sashdat'
   		casout= {caslib='${appEnv.WORKLIBNAME}' name='${appEnv.COMPARISONTABLE}_1' replace=TRUE};
 
+    datastep.runCode / single = 'yes'
+    code = "
+    data ${appEnv.WORKLIBNAME}.${appEnv.COMPARISONTABLE};
+      set  ${appEnv.WORKLIBNAME}.${appEnv.COMPARISONTABLE}_1
+        ;
+    run;
+    ";
+
+    run;
+    table.promote /
+    name="${appEnv.COMPARISONTABLE}"
+    ;  
+  
 
   `
-  console.log( caslStatements);
+  console.log(caslStatements);
   let payload = {
     action: 'sccasl.runCasl',
-    data: {code: caslStatements}
+    data: { code: caslStatements }
   }
   debugger;
   let r = await store.runAction(session, payload);

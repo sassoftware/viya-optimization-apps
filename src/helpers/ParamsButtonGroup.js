@@ -54,42 +54,21 @@ class _ParamsButtonGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data      : props.data,
-      objType   : props.objType,
-      scenario  : props.scenario
-
+      objType   : '1',
     };
   }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      data      : nextProps.data,
-      objType   : nextProps.objType,
-      scenario  : nextProps.scenario
-    });
-  }
-
-  componentDidMount () {
-    debugger;
-  }
-
-  componentDidUpdate () {
-    console.log(this.state.objType)
-    console.log(this.state.data)
-  }
-
 
   handleClick = () => {
     debugger;
     console.log(this.state.objType)
-    console.log('scenario', this.state.scenario)
+    console.log('scenario', this.props.scenario)
     debugger;
     if(this.state.objType) {
       let {store, viya} = this.context;
-      loadInput( store, viya.session, this.state.data, viya.appEnv.WORKLIBNAME, viya.appEnv.OPTABLENAME)
+      loadInput( store, viya.session, this.props.data, viya.appEnv.WORKLIBNAME, viya.appEnv.OPTABLENAME)
       .then(r =>{
         console.log(JSON.stringify(r.items(),null,4))
-        optimize(this.context.store, this.context.viya.session, this.state.objType, this.context.viya.appEnv, this.state.scenario)
+        optimize(this.context.store, this.context.viya.session, this.state.objType, this.context.viya.appEnv, this.props.scenario)
         .then(result =>{
           this.props.history.push('/outputReport');
         })

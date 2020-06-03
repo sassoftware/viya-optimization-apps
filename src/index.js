@@ -30,7 +30,7 @@ let appEnv = window.optUI.appEnv;
 debugger;
 let store = window.restaf.initStore();
 debugger;
-setupViya(store, appEnv, null)
+setupViya(store, appEnv, window.optUI.logonPayload)
   .then ( (r) => {
     ReactDOM.render(
       <AppProvider value={{store: store, viya: r}}>

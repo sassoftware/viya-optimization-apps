@@ -15,32 +15,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ---------------------------------------------------------------------------------------
 */
-'use strict';
 
-let rafserver = require ('restaf-server');
-let rafEnv    = (process.argv.length === 3) ? process.argv [ 2 ] : null ;
-console.log((rafEnv === null) ? 'NOTE: Using settings from environment variables': `NOTE: env file is: ${rafEnv}`);
-rafserver.UIapp (getCustomHandler(), null, rafEnv);
+import React, { Fragment } from 'react';
+import "../css/styles.css";
 
-function getCustomHandler () {
-    let handler =
-    [
-        {
-            method: [ 'GET' ],
-            path  : `/appenv`,
-            config: {
-                auth   : false,
-                cors   : true,
-                handler: getAppEnv
 
-            }
-       }
+function ReportViewer(props) {
 
-    ];
-    return handler;
-    }
+  return (
+    <Fragment><sas-report
+			url={props.url}
+			reportUri={props.reportUri}
+			class="va-report"
+	>
+    </sas-report></Fragment>
+    
+  )
+}
 
-    async function getAppEnv (req, h) {
-        console.log( env );
-    return env;
-    }
+export default ReportViewer;

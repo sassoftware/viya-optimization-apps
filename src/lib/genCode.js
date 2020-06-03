@@ -23,9 +23,6 @@ function genCode(objType, appEnv, scenario) {
 	action table.dropTable / name='${appEnv.OUTPUTMASTERTABLENAME}' caslib='${appEnv.WORKLIBNAME}' quiet=TRUE;
 	action table.dropTable / name='${appEnv.OUTPUTSITETABLENAME}' caslib='${appEnv.WORKLIBNAME}' quiet=TRUE;
 	action table.dropTable / name='${appEnv.OUTPUTCOSTTABLENAME}' caslib='${appEnv.WORKLIBNAME}' quiet=TRUE;
-	action table.dropTable / name='${appEnv.COMPARISONTABLE}' caslib='${appEnv.WORKLIBNAME}' quiet=TRUE;
-	action table.deletesource /
-	caslib='${appEnv.WORKLIBNAME}' source='${appEnv.COMPARISONTABLE}.sashdat' quiet=TRUE;
 
 	/*Calling OptCode */
 	loadactionset 'optimization';
@@ -123,6 +120,8 @@ function genCode(objType, appEnv, scenario) {
 	caslib= '${appEnv.WORKLIBNAME}' path= '${appEnv.COMPARISONTABLE}_1.sashdat'
 	casout= {caslib='${appEnv.WORKLIBNAME}' name='${appEnv.COMPARISONTABLE}_1' replace=TRUE };
 
+	action table.dropTable/
+	caslib='${appEnv.WORKLIBNAME}' name='${appEnv.COMPARISONTABLE}' quiet=TRUE;
 
 
 	datastep.runCode / single = 'yes'
@@ -134,27 +133,15 @@ function genCode(objType, appEnv, scenario) {
 		";
 		run;
 
-		action table.save /
-		caslib  = '${appEnv.WORKLIBNAME}'
-		name    = '${appEnv.COMPARISONTABLE}'
-		replace = TRUE
-		table= {
-			caslib = '${appEnv.WORKLIBNAME}'
-			name   = '${appEnv.COMPARISONTABLE}'
-		};
-
-	action table.loadTable/
-	caslib= '${appEnv.WORKLIBNAME}' path= '${appEnv.COMPARISONTABLE}.sashdat'
-	casout= {caslib='${appEnv.WORKLIBNAME}' name='${appEnv.COMPARISONTABLE}' replace=TRUE };
-
-
+  table.promote /
+  name="${appEnv.COMPARISONTABLE}"
+  ;  
 
 	action table.fetch r=result / to= 1000
 	table= {caslib = '${appEnv.WORKLIBNAME}' name = '${appEnv.COMPARISONTABLE}'};
 	run;
 
-	action table.dropTable/
-	caslib='${appEnv.WORKLIBNAME}' name='${appEnv.COMPARISONTABLE}' quiet=TRUE;
+
 
 	r = {A= result};
 	send_response( r) ;

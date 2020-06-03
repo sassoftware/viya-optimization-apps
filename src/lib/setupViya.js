@@ -43,14 +43,6 @@ async function setupViya (store, appEnv, logonPayload) {
   }
   console.log(JSON.stringify(session.links(), null,4));
 
-  //Performing startUp data steps
-  startUp(appEnv, session, store)
-  .then()
-  .catch((err) =>{
-    alert(err);
-  }
-)
-
 //TODO: Add new AppInit functions//
 let r = {
   session : session,

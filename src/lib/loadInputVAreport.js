@@ -24,7 +24,7 @@ limitations under the License.
 
     let href = `${host}/SASVisualAnalytics/?reportUri=${reportUri}${options}`;
     console.log(href);
-    return href;
+    return reportUri;
 }
 
 async function updateInputReport(store, reportName, services) {
