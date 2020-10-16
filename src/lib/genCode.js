@@ -133,9 +133,12 @@ function genCode(objType, appEnv, scenario) {
 		";
 		run;
 
-  table.promote /
-  name="${appEnv.COMPARISONTABLE}"
-  ;  
+	table.promote /
+	name="${appEnv.COMPARISONTABLE}"
+	caslib="${appEnv.WORKLIBNAME}"
+	target="${appEnv.COMPARISONTABLE}"
+	targetCaslib="${appEnv.WORKLIBNAME}"  
+	;  
 
 	action table.fetch r=result / to= 1000
 	table= {caslib = '${appEnv.WORKLIBNAME}' name = '${appEnv.COMPARISONTABLE}'};

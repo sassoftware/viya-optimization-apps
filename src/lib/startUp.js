@@ -75,11 +75,14 @@ async function startUp(appEnv, session, store) {
     ";
 
     run;
+
     table.promote /
     name="${appEnv.COMPARISONTABLE}"
+    caslib="${appEnv.WORKLIBNAME}"
+    target="${appEnv.COMPARISONTABLE}"
+    targetCaslib="${appEnv.WORKLIBNAME}"  
     ;  
   
-
   `
   console.log(caslStatements);
   let payload = {
