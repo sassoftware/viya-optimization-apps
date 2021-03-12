@@ -54,7 +54,7 @@
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-table": "^4.3.1",
     "react-csv-reader": "^2.0.2",
-    "react-dev-utils": "^6.1.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "latest",
     "react-focus-lock": "^2.2.0",
     "react-remove-scroll": "^2.1.1",
