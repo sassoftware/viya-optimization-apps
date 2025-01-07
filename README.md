@@ -1,3 +1,5 @@
+This project is no longer under active development and was archived on 2025-01-07.
+
 # Facility Location Optimization Demo
 
 ## Overview
